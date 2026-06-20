@@ -1,2 +1,0 @@
-# Deep Extract: reactbits.dev
-

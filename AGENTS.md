@@ -1,46 +1,43 @@
-# SEOSONA UX-UI Project Rules
+# UX-UI System — Startup Contract
 
-This project is bound to SEOSONA OS through `seosona.project.json`.
+## System Identity
 
-## Identity
+This is an autonomous UX/UI design and build system.
+It operates independently of any brand or product — project-specific context lives in `6_WORKSPACE/`.
 
-**SEOSONA UX-UI** is a dual-purpose system:
-1. **Design Library** — The single source of truth for all SEOSONA web product design standards.
-2. **Autonomous UX/UI Agent System** — A self-operating team of AI agents that can research, design, build, and deliver complete web UI/UX projects.
+## Startup Sequence
 
-## Startup Contract
+On every session start:
 
-1. Resolve SEOSONA OS through `~/.seosona`.
-2. Read `~/.seosona/1_CORE/SOUL.md` (OS-level identity).
-3. Read this project's `SOUL.md` (UX/UI design constitution — MANDATORY before any design work).
-4. Read `1_LIBRARY/tokens/design-tokens.md` for exact color/spacing values.
-5. Check active project memory at `4_MEMORY/projects/`.
-6. Route task through appropriate workflow in `2_AGENTS/workflows/`.
-
-## Design Enforcement
-
-**CRITICAL:** Before writing a single line of CSS or HTML, you MUST:
-- Read and internalize `SOUL.md` completely.
-- Verify your color choices against `1_LIBRARY/tokens/design-tokens.md`.
-- Check `1_LIBRARY/components/` for existing reusable components before building new ones.
-
-## Project Connector
-
-- Manifest: `seosona.project.json`
-- Memory namespace: `seosona-uxui`
-- Autonomy level: `project_edit`
-- Output format: HTML/CSS/JS (vanilla) — framework-agnostic
-- Publish/deploy actions require explicit user intent.
+1. Read `0_BRAIN/SOUL.md` — internalize design principles and non-negotiables
+2. Read `0_BRAIN/capability_bridge.md` — load task routing table
+3. Read `0_BRAIN/MASTER_INDEX.md` — understand what exists in the system
+4. Check `6_WORKSPACE/` for any active project context
+5. Load active project palette from `4_LIBRARY/tokens/palettes/` if project is set
+6. Route task through `0_BRAIN/capability_bridge.md`
 
 ## Agent Activation
 
-For design tasks, activate agents from `2_AGENTS/personas/`:
-- UI/UX design, wireframes, mockups → `ui-ux-designer`
-- Animations, micro-interactions, motion → `frontend-motion-interaction-designer`
+Before any design or build task:
+- Check `1_AGENTS/ROSTER.md` for available agents
+- Activate the most relevant agent persona
+- Load required skills from `2_KNOWLEDGE/skills/`
+- Run the appropriate pipeline from `3_WORKFLOWS/`
 
-## Output Convention
+## Output Rules
 
-All deliverables go into:
-- `4_MEMORY/exports/` — Standalone HTML files, component demos
-- `4_MEMORY/projects/{project-name}/` — Full project workspaces
-- `4_MEMORY/audits/{domain}/` — UX audit reports
+| Task | Output Directory |
+|---|---|
+| Library component | `4_LIBRARY/components/{type}/` |
+| Library template | `4_LIBRARY/templates/{static|dynamic}/{name}/` |
+| Project work | `6_WORKSPACE/{project-slug}/` |
+| UX audit | `5_MEMORY/audits/{domain}/` |
+| Knowledge item | `5_MEMORY/knowledge_items/` |
+
+## System Rules
+
+- All system files: English only
+- No hardcoded colors in components — use CSS custom properties
+- All HTML must be valid and semantic
+- All deliverables must pass accessibility and performance checklists
+- No Lorem Ipsum in any deliverable

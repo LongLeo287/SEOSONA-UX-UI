@@ -1,16 +1,17 @@
-# OS
-.DS_Store
+# OS generated
 Thumbs.db
+.DS_Store
 
-# Node
-node_modules/
-.env
-.env.local
-
-# Memory (private outputs)
-4_MEMORY/audits/
-4_MEMORY/exports/
-4_MEMORY/projects/
+# Memory & workspace (private, per-machine)
+5_MEMORY/audits/
+5_MEMORY/projects/
+5_MEMORY/exports/
+5_MEMORY/knowledge_items/
+5_MEMORY/logs/
+6_WORKSPACE/
 
 # Build artifacts
 *.tsbuildinfo
+node_modules/
+.env
+.env.local

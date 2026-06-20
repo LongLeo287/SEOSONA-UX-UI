@@ -1,0 +1,48 @@
+# Palette: Fintech
+# Profile: Financial technology — trust, security, growth (green + navy)
+
+:root {
+  /* Backgrounds */
+  --color-bg-base:     #F7F9FC;
+  --color-bg-surface:  #FFFFFF;
+  --color-bg-elevated: #EEF2F7;
+  --color-bg-navy:     #0B1D3A;
+
+  /* Text */
+  --color-text-primary: #0B1D3A;
+  --color-text-body:    #4A5B74;
+  --color-text-muted:   #8294A8;
+  --color-text-inverse: #FFFFFF;
+
+  /* Accent — trust green */
+  --color-accent-primary: #00875A;
+  --color-accent-hover:   #00A36E;
+  --color-accent-light:   #E3F5EE;
+  --color-accent-border:  #A3D9C0;
+
+  /* Navy accents */
+  --color-navy-primary: #0B1D3A;
+  --color-navy-mid:     #1E3A5F;
+  --color-navy-light:   #2C5282;
+
+  /* Secondary accents */
+  --color-accent-gold:  #D4AF37;
+  --color-accent-blue:  #2D7DD2;
+
+  /* Borders */
+  --color-border:        #D8E1EC;
+  --color-border-subtle: #EEF2F7;
+
+  /* Semantic */
+  --color-success: #00875A;
+  --color-warning: #D4AF37;
+  --color-error:   #D94F4F;
+  --color-info:    #2D7DD2;
+
+  /* Data viz palette (for charts) */
+  --color-chart-1: #00875A;
+  --color-chart-2: #2D7DD2;
+  --color-chart-3: #D4AF37;
+  --color-chart-4: #7B68EE;
+  --color-chart-5: #FF6B6B;
+}
