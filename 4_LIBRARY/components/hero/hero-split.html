@@ -1,0 +1,365 @@
+<!--
+  Component: Hero — Split Layout
+  Type: hero
+  Variant: split (left text + right visual)
+  Version: 1.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Split — Component Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@4.0.0/lib/anime.iife.min.js" defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; text-decoration: none; }
+    :root {
+      --color-bg-base:      #FFFFFF;
+      --color-bg-surface:   #F8FAFC;
+      --color-text-primary: #04091A;
+      --color-text-body:    #64748B;
+      --color-accent:       #1D4ED8;
+      --color-accent-light: #EFF6FF;
+      --color-border:       #E2E8F0;
+      --color-bg-inverted:  #04091A;
+      --font-heading: 'Poppins', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --shadow-hover: 0 20px 40px -10px rgb(29 78 216 / 0.2);
+      --transition:   all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    body { font-family: var(--font-body); background: var(--color-bg-base); -webkit-font-smoothing: antialiased; }
+
+    /* ─── Hero Split ─────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 5rem 1.5rem;
+      background: var(--color-bg-base);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: 0; top: 0;
+      width: 50%;
+      height: 100%;
+      background: var(--color-bg-surface);
+      clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    .hero__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Left — Text */
+    .hero__text { display: flex; flex-direction: column; }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3125rem 0.875rem;
+      background: var(--color-accent-light);
+      border: 1px solid #BFDBFE;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+      width: fit-content;
+      opacity: 0;
+    }
+
+    .hero__headline {
+      font-family: var(--font-heading);
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 900;
+      color: var(--color-text-primary);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+    }
+
+    .hero__sub {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--color-text-body);
+      max-width: 480px;
+      margin-bottom: 2.25rem;
+      opacity: 0;
+    }
+
+    /* Checklist */
+    .hero__checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      margin-bottom: 2.25rem;
+      opacity: 0;
+    }
+    .hero__checklist li {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.9375rem;
+      color: var(--color-text-body);
+    }
+    .check-icon {
+      width: 20px; height: 20px;
+      background: #ECFDF5;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #10B981;
+      flex-shrink: 0;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-body); font-weight: 600;
+      border-radius: 9999px; transition: var(--transition);
+      cursor: pointer; border: none; text-decoration: none;
+    }
+    .btn--lg { padding: 0.875rem 1.75rem; font-size: 1rem; }
+    .btn--primary { background: var(--color-bg-inverted); color: #FFFFFF; }
+    .btn--primary:hover { background: var(--color-accent); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .btn--ghost { background: transparent; color: var(--color-text-primary); border: 1.5px solid var(--color-border); }
+    .btn--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); transform: translateY(-2px); }
+
+    /* Right — Visual */
+    .hero__visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      opacity: 0;
+    }
+
+    /* Mock dashboard card */
+    .mock-card {
+      background: var(--color-bg-base);
+      border: 1px solid var(--color-border);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 16px -4px rgb(0 0 0 / 0.08);
+    }
+    .mock-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .mock-card__title { font-weight: 600; font-size: 0.875rem; color: var(--color-text-primary); }
+    .mock-card__badge {
+      padding: 0.2rem 0.6rem;
+      background: #ECFDF5;
+      color: #10B981;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 9999px;
+    }
+    /* Mini bar chart */
+    .mini-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 64px;
+    }
+    .bar {
+      flex: 1;
+      background: var(--color-accent-light);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .bar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--color-accent);
+      border-radius: 4px 4px 0 0;
+      animation: barGrow 1.5s ease-out forwards;
+      animation-delay: var(--d, 0ms);
+    }
+    .bar:nth-child(1) { height: 60%; --d: 400ms; }
+    .bar:nth-child(2) { height: 80%; --d: 480ms; }
+    .bar:nth-child(3) { height: 50%; --d: 560ms; }
+    .bar:nth-child(4) { height: 90%; --d: 640ms; }
+    .bar:nth-child(5) { height: 70%; --d: 720ms; }
+    .bar:nth-child(6) { height: 100%; --d: 800ms; }
+    .bar:nth-child(7) { height: 65%; --d: 880ms; }
+
+    @keyframes barGrow {
+      from { height: 0; }
+      to { height: 100%; }
+    }
+
+    .mock-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.375rem;
+      margin-top: 0.75rem;
+    }
+    .mock-stat__num {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-text-primary);
+    }
+    .mock-stat__change {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #10B981;
+    }
+
+    /* Floating pill */
+    .mock-pill {
+      background: var(--color-bg-base);
+      border: 1px solid var(--color-border);
+      border-radius: 9999px;
+      padding: 0.625rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px -4px rgb(0 0 0 / 0.1);
+      width: fit-content;
+      margin-left: auto;
+    }
+    .pill-dot { width: 8px; height: 8px; background: #10B981; border-radius: 50%; animation: pulse 2s infinite; }
+    .mock-pill span { font-size: 0.875rem; font-weight: 500; color: var(--color-text-primary); }
+
+    @media (max-width: 1024px) {
+      .hero__inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero::before { display: none; }
+    }
+    @media (max-width: 640px) {
+      .hero__actions { flex-direction: column; }
+      .btn--lg { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero" id="hero" aria-labelledby="hero-headline">
+  <div class="hero__inner">
+
+    <!-- Left: Text -->
+    <div class="hero__text">
+      <span class="hero__badge" id="hero-badge">
+        <i data-lucide="award" style="width:13px;height:13px;" aria-hidden="true"></i>
+        Rated #1 by G2 users 2025
+      </span>
+
+      <h1 class="hero__headline" id="hero-headline">
+        The smarter way to<br>run your campaigns
+      </h1>
+
+      <p class="hero__sub" id="hero-sub">
+        Stop guessing. Start scaling. Get data-driven insights
+        that turn ad spend into measurable revenue growth.
+      </p>
+
+      <ul class="hero__checklist" id="hero-checklist">
+        <li>
+          <span class="check-icon" aria-hidden="true">
+            <i data-lucide="check" style="width:12px;height:12px;"></i>
+          </span>
+          Real-time campaign performance dashboard
+        </li>
+        <li>
+          <span class="check-icon" aria-hidden="true">
+            <i data-lucide="check" style="width:12px;height:12px;"></i>
+          </span>
+          Automated bid optimization with AI
+        </li>
+        <li>
+          <span class="check-icon" aria-hidden="true">
+            <i data-lucide="check" style="width:12px;height:12px;"></i>
+          </span>
+          Plain-language reports for any team
+        </li>
+      </ul>
+
+      <div class="hero__actions" id="hero-actions">
+        <a href="#" class="btn btn--primary btn--lg">
+          Start free trial
+          <i data-lucide="arrow-right" style="width:18px;height:18px;" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn--ghost btn--lg">
+          Book a demo
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Visual mock -->
+    <div class="hero__visual" id="hero-visual" aria-hidden="true">
+      <div class="mock-pill">
+        <span class="pill-dot"></span>
+        <span>Live — 247 active campaigns</span>
+      </div>
+
+      <div class="mock-card">
+        <div class="mock-card__header">
+          <span class="mock-card__title">Monthly Revenue</span>
+          <span class="mock-card__badge">↑ 24.3%</span>
+        </div>
+        <div class="mini-chart">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <div class="mock-stat">
+          <span class="mock-stat__num">$124,800</span>
+          <span class="mock-stat__change">+$24k this month</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const { createTimeline } = anime;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const tl = createTimeline({ defaults: { easing: 'easeOutQuart' } });
+    tl.add('#hero-badge',     { opacity: [0, 1], translateX: [-20, 0], duration: 500 })
+      .add('#hero-headline',  { opacity: [0, 1], translateX: [-24, 0], duration: 600 }, 100)
+      .add('#hero-sub',       { opacity: [0, 1], translateX: [-16, 0], duration: 500 }, 200)
+      .add('#hero-checklist', { opacity: [0, 1], translateX: [-12, 0], duration: 500 }, 300)
+      .add('#hero-actions',   { opacity: [0, 1], translateX: [-12, 0], duration: 500 }, 400)
+      .add('#hero-visual',    { opacity: [0, 1], translateX: [24, 0], duration: 700 }, 200);
+  } else {
+    ['#hero-badge','#hero-headline','#hero-sub','#hero-checklist','#hero-actions','#hero-visual']
+      .forEach(id => { document.querySelector(id).style.opacity = '1'; });
+  }
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+</script>
+</body>
+</html>
