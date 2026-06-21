@@ -1,0 +1,285 @@
+<!-- Mega Menu Navigation
+     UX-UI System — 4_LIBRARY/components/navigation/mega-menu.html
+-->
+
+<style>
+  .mega-nav {
+    position: relative;
+    background: var(--color-bg-base, #FFFFFF);
+    border-bottom: 1px solid var(--color-border, #E2E8F0);
+    z-index: 100;
+  }
+  .mega-nav__inner {
+    max-width: var(--container-max, 1280px);
+    margin: 0 auto;
+    padding: 0 var(--container-px, 1.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.5rem;
+  }
+  .mega-nav__logo {
+    font-family: var(--font-heading, 'Poppins', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-text-primary, #04091A);
+    text-decoration: none;
+  }
+  
+  /* Desktop Menu */
+  .mega-nav__menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+  }
+  @media (max-width: 1024px) {
+    .mega-nav__menu { display: none; }
+  }
+  .mega-nav__item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .mega-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-body, #64748B);
+    text-decoration: none;
+    border-radius: var(--radius-md, 0.75rem);
+    transition: color 0.2s, background 0.2s;
+  }
+  .mega-nav__link:hover, .mega-nav__item:hover .mega-nav__link {
+    color: var(--color-text-primary, #04091A);
+    background: var(--color-bg-surface, #F8FAFC);
+  }
+  .mega-nav__link-icon {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s;
+  }
+  .mega-nav__item:hover .mega-nav__link-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown Container */
+  .mega-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--color-bg-base, #FFFFFF);
+    border-bottom: 1px solid var(--color-border, #E2E8F0);
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    pointer-events: none;
+  }
+  .mega-nav__item:hover .mega-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .mega-dropdown__inner {
+    max-width: var(--container-max, 1280px);
+    margin: 0 auto;
+    padding: 2.5rem var(--container-px, 1.5rem);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 4rem;
+  }
+
+  /* Dropdown Featured Section */
+  .mega-featured {
+    background: var(--color-bg-surface, #F8FAFC);
+    padding: 2rem;
+    border-radius: var(--radius-xl, 1.25rem);
+  }
+  .mega-featured__badge {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent, #1D4ED8);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .mega-featured__title {
+    font-family: var(--font-heading, 'Poppins', sans-serif);
+    font-size: 1.25rem;
+    color: var(--color-text-primary, #04091A);
+    margin-bottom: 0.5rem;
+  }
+  .mega-featured__desc {
+    font-size: 0.875rem;
+    color: var(--color-text-body, #64748B);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Dropdown Grid (Links) */
+  .mega-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 3rem;
+  }
+  .mega-group__title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted, #94A3B8);
+    margin-bottom: 1.25rem;
+  }
+  .mega-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .mega-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: var(--radius-lg, 0.75rem);
+    text-decoration: none;
+    transition: background 0.2s;
+    margin-left: -0.75rem;
+  }
+  .mega-card:hover {
+    background: var(--color-bg-surface, #F8FAFC);
+  }
+  .mega-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md, 0.5rem);
+    background: #FFFFFF;
+    border: 1px solid var(--color-border, #E2E8F0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent, #1D4ED8);
+    flex-shrink: 0;
+  }
+  .mega-card__title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-text-primary, #04091A);
+    margin-bottom: 0.125rem;
+  }
+  .mega-card__desc {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted, #94A3B8);
+  }
+</style>
+
+<header class="mega-nav">
+  <div class="mega-nav__inner">
+    <a href="/" class="mega-nav__logo">[Agency]</a>
+    
+    <nav class="mega-nav__menu">
+      
+      <!-- Item with Mega Dropdown -->
+      <div class="mega-nav__item">
+        <a href="#" class="mega-nav__link">
+          Products
+          <svg class="mega-nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        
+        <!-- The Dropdown -->
+        <div class="mega-dropdown">
+          <div class="mega-dropdown__inner">
+            
+            <!-- Featured sidebar -->
+            <div class="mega-featured">
+              <span class="mega-featured__badge">New Release</span>
+              <h3 class="mega-featured__title">SEOSONA OS v2</h3>
+              <p class="mega-featured__desc">The autonomous AI operating system for full-stack agency workflows.</p>
+              <a href="#" class="btn-solid" style="padding:0.6rem 1.2rem; font-size:0.875rem">Explore OS →</a>
+            </div>
+
+            <!-- Links grid -->
+            <div class="mega-grid">
+              <!-- Group 1 -->
+              <div class="mega-group">
+                <h4 class="mega-group__title">Platform</h4>
+                <ul class="mega-list">
+                  <li>
+                    <a href="#" class="mega-card">
+                      <div class="mega-card__icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+                      </div>
+                      <div>
+                        <div class="mega-card__title">UX-UI Library</div>
+                        <div class="mega-card__desc">Pre-built components & templates</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="mega-card">
+                      <div class="mega-card__icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4l2-9 5 18 2-9h5"/></svg>
+                      </div>
+                      <div>
+                        <div class="mega-card__title">Motion Engine</div>
+                        <div class="mega-card__desc">Liquid physics animations</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Group 2 -->
+              <div class="mega-group">
+                <h4 class="mega-group__title">Solutions</h4>
+                <ul class="mega-list">
+                  <li>
+                    <a href="#" class="mega-card">
+                      <div class="mega-card__icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                      </div>
+                      <div>
+                        <div class="mega-card__title">For Agencies</div>
+                        <div class="mega-card__desc">Scale your client delivery</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="mega-card">
+                      <div class="mega-card__icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                      </div>
+                      <div>
+                        <div class="mega-card__title">For Startups</div>
+                        <div class="mega-card__desc">Launch faster with better UI</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Simple Item -->
+      <div class="mega-nav__item">
+        <a href="#" class="mega-nav__link">Pricing</a>
+      </div>
+      
+    </nav>
+    
+    <div class="mega-nav__actions" style="display:flex; gap:1rem;">
+      <a href="#" class="btn-ghost" style="padding:0.5rem 1rem">Log in</a>
+      <a href="#" class="btn-solid" style="padding:0.5rem 1.25rem">Sign up</a>
+    </div>
+  </div>
+</header>

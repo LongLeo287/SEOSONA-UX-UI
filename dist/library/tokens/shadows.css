@@ -1,0 +1,54 @@
+/* =============================================================
+   Shadow & Elevation Tokens
+   UX-UI System — 4_LIBRARY/tokens/shadows.css
+   ============================================================= */
+
+:root {
+  /* ─── Neutral shadows (light themes) ───────────────────── */
+  --shadow-none: none;
+  --shadow-xs:   0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm:   0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md:   0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg:   0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-xl:   0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.06);
+  --shadow-2xl:  0 25px 50px -12px rgb(0 0 0 / 0.2);
+  --shadow-inner:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+
+  /* ─── Colored accent shadows (for CTAs, featured cards) ── */
+  --shadow-accent:       0 8px 25px -6px rgb(29 78 216 / 0.25);
+  --shadow-accent-hover: 0 20px 40px -10px rgb(29 78 216 / 0.35);
+  --shadow-accent-glow:  0 0 40px -8px rgb(29 78 216 / 0.4);
+
+  /* ─── Success shadow ────────────────────────────────────── */
+  --shadow-success:      0 8px 25px -6px rgb(16 185 129 / 0.25);
+
+  /* ─── Dark theme shadows ────────────────────────────────── */
+  --shadow-dark-sm:  0 1px 4px 0 rgb(0 0 0 / 0.3);
+  --shadow-dark-md:  0 4px 16px 0 rgb(0 0 0 / 0.35);
+  --shadow-dark-lg:  0 10px 30px 0 rgb(0 0 0 / 0.45);
+  --shadow-dark-xl:  0 20px 50px 0 rgb(0 0 0 / 0.6);
+
+  /* ─── Card hover shadow (most common use) ───────────────── */
+  --shadow-card-hover: var(--shadow-xl);
+  --shadow-card-hover-accent: var(--shadow-accent-hover);
+
+  /* ─── Focus ring (accessibility) ───────────────────────── */
+  --focus-ring:       0 0 0 3px rgb(59 130 246 / 0.4);
+  --focus-ring-error: 0 0 0 3px rgb(239 68 68 / 0.3);
+  --focus-ring-success:0 0 0 3px rgb(16 185 129 / 0.3);
+}
+
+/* ─── Shadow utility classes ───────────────────────────────── */
+.shadow-none { box-shadow: var(--shadow-none); }
+.shadow-xs   { box-shadow: var(--shadow-xs);   }
+.shadow-sm   { box-shadow: var(--shadow-sm);   }
+.shadow-md   { box-shadow: var(--shadow-md);   }
+.shadow-lg   { box-shadow: var(--shadow-lg);   }
+.shadow-xl   { box-shadow: var(--shadow-xl);   }
+.shadow-2xl  { box-shadow: var(--shadow-2xl);  }
+
+/* Focus ring utility */
+.focus-ring:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+
+/* Glow effect for dark themes */
+.glow-accent { box-shadow: var(--shadow-accent-glow); }

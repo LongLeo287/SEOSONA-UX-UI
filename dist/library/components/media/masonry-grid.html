@@ -1,0 +1,146 @@
+<!-- CSS Columns Masonry Grid
+     UX-UI System — 4_LIBRARY/components/media/masonry-grid.html
+-->
+
+<style>
+  .masonry-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: var(--font-body, 'Inter', sans-serif);
+  }
+
+  /* 
+   * CSS Columns Approach
+   * Super simple, performant, no JS required for layout.
+   */
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .masonry-grid { column-count: 2; }
+  }
+  
+  @media (min-width: 1024px) {
+    .masonry-grid { column-count: 3; }
+  }
+
+  /* Items */
+  .masonry-item {
+    break-inside: avoid; /* Prevents item from breaking across columns */
+    margin-bottom: 1.5rem; /* Gap between vertical items */
+    position: relative;
+    border-radius: var(--radius-lg, 0.75rem);
+    overflow: hidden;
+    background: var(--color-bg-surface, #F8FAFC);
+    border: 1px solid var(--color-border, #E2E8F0);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  }
+
+  .masonry-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  /* Hover Overlay */
+  .masonry-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(4,9,26,0.8) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+  }
+
+  .masonry-item:hover .masonry-overlay {
+    opacity: 1;
+  }
+
+  .masonry-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .masonry-title {
+    color: #FFFFFF;
+    font-family: var(--font-heading, 'Poppins', sans-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+  }
+
+  .masonry-desc {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.875rem;
+    transform: translateY(10px);
+    transition: transform 0.3s ease 0.05s;
+  }
+
+  .masonry-item:hover .masonry-title,
+  .masonry-item:hover .masonry-desc {
+    transform: translateY(0);
+  }
+</style>
+
+<div class="masonry-container">
+  <div class="masonry-grid">
+    
+    <div class="masonry-item">
+      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="Gallery Image">
+      <div class="masonry-overlay">
+        <div class="masonry-title">Abstract Geometry</div>
+        <div class="masonry-desc">Digital Art</div>
+      </div>
+    </div>
+    
+    <div class="masonry-item">
+      <!-- Different aspect ratio -->
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=800&fit=crop&q=80" alt="Gallery Image">
+      <div class="masonry-overlay">
+        <div class="masonry-title">Data Visualization</div>
+        <div class="masonry-desc">Dashboard UI</div>
+      </div>
+    </div>
+    
+    <div class="masonry-item">
+      <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=600&h=400&fit=crop&q=80" alt="Gallery Image">
+      <div class="masonry-overlay">
+        <div class="masonry-title">Modern Interface</div>
+        <div class="masonry-desc">Web Design</div>
+      </div>
+    </div>
+    
+    <div class="masonry-item">
+      <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=700&fit=crop&q=80" alt="Gallery Image">
+      <div class="masonry-overlay">
+        <div class="masonry-title">Mobile App</div>
+        <div class="masonry-desc">UX Research</div>
+      </div>
+    </div>
+    
+    <div class="masonry-item">
+      <img src="https://images.unsplash.com/photo-1551009175-8a68da93d5f9?w=600&h=500&fit=crop&q=80" alt="Gallery Image">
+      <div class="masonry-overlay">
+        <div class="masonry-title">E-Commerce Flow</div>
+        <div class="masonry-desc">Conversion Rate</div>
+      </div>
+    </div>
+    
+    <div class="masonry-item">
+      <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?w=600&h=900&fit=crop&q=80" alt="Gallery Image">
+      <div class="masonry-overlay">
+        <div class="masonry-title">Typography System</div>
+        <div class="masonry-desc">Brand Guidelines</div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,247 @@
+<!-- Responsive Data Table with Sticky Header
+     UX-UI System — 4_LIBRARY/components/data-display/data-table.html
+-->
+
+<style>
+  .table-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    background: var(--color-bg-base, #FFFFFF);
+    border: 1px solid var(--color-border, #E2E8F0);
+    border-radius: var(--radius-lg, 0.75rem);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  
+  /* Table Header Controls */
+  .table-toolbar {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-border, #E2E8F0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-base, #FFFFFF);
+  }
+  .table-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary, #04091A);
+  }
+  .table-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .search-input {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border, #E2E8F0);
+    border-radius: var(--radius-md, 0.5rem);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--color-accent, #1D4ED8); }
+
+  /* Table Wrapper for scroll */
+  .table-wrapper {
+    width: 100%;
+    max-height: 400px; /* enables sticky header */
+    overflow: auto;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  /* Sticky Header */
+  .data-table th {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg-surface, #F8FAFC);
+    padding: 0.875rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted, #94A3B8);
+    border-bottom: 1px solid var(--color-border, #E2E8F0);
+    z-index: 10;
+  }
+  
+  /* Sortable columns */
+  .th-sortable { cursor: pointer; transition: color 0.2s; }
+  .th-sortable:hover { color: var(--color-text-primary, #04091A); }
+  .th-sortable::after {
+    content: '↕';
+    margin-left: 0.5rem;
+    opacity: 0.3;
+  }
+  
+  /* Table Body */
+  .data-table td {
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-body, #64748B);
+    border-bottom: 1px solid var(--color-border, #E2E8F0);
+  }
+  .data-table tbody tr {
+    transition: background 0.2s;
+  }
+  .data-table tbody tr:hover {
+    background: var(--color-bg-surface, #F8FAFC);
+  }
+  .data-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Specific Cell Styles */
+  .cell-primary {
+    font-weight: 600;
+    color: var(--color-text-primary, #04091A);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-border, #E2E8F0);
+    object-fit: cover;
+  }
+  
+  /* Status Badges */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .status-active { background: #ECFDF5; color: #059669; }
+  .status-pending { background: #FFFBEB; color: #D97706; }
+  .status-inactive { background: #F1F5F9; color: #475569; }
+  
+  /* Action Button */
+  .btn-icon {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted, #94A3B8);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .btn-icon:hover { color: var(--color-text-primary, #04091A); background: var(--color-border, #E2E8F0); }
+</style>
+
+<div class="table-container">
+  <div class="table-toolbar">
+    <div class="table-title">Team Members</div>
+    <div class="table-actions">
+      <input type="text" class="search-input" placeholder="Search members...">
+      <button class="btn btn-primary" style="padding:0.5rem 1rem; border-radius:0.5rem; background:#1D4ED8; color:#fff; border:none; cursor:pointer;">Add Member</button>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="th-sortable">Name</th>
+          <th class="th-sortable">Role</th>
+          <th class="th-sortable">Status</th>
+          <th>Last Active</th>
+          <th style="text-align: right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="cell-primary">
+              <img src="https://i.pravatar.cc/150?u=1" alt="Avatar" class="avatar">
+              Olivia Rhye
+            </div>
+          </td>
+          <td>Product Designer</td>
+          <td><span class="status-badge status-active">Active</span></td>
+          <td>Just now</td>
+          <td style="text-align: right;">
+            <button class="btn-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cell-primary">
+              <img src="https://i.pravatar.cc/150?u=2" alt="Avatar" class="avatar">
+              Phoenix Baker
+            </div>
+          </td>
+          <td>Engineering Manager</td>
+          <td><span class="status-badge status-pending">Invited</span></td>
+          <td>Never</td>
+          <td style="text-align: right;">
+            <button class="btn-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cell-primary">
+              <img src="https://i.pravatar.cc/150?u=3" alt="Avatar" class="avatar">
+              Lana Steiner
+            </div>
+          </td>
+          <td>Frontend Developer</td>
+          <td><span class="status-badge status-active">Active</span></td>
+          <td>2 hours ago</td>
+          <td style="text-align: right;">
+            <button class="btn-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cell-primary">
+              <img src="https://i.pravatar.cc/150?u=4" alt="Avatar" class="avatar">
+              Demi Wilkinson
+            </div>
+          </td>
+          <td>Backend Developer</td>
+          <td><span class="status-badge status-inactive">Offline</span></td>
+          <td>3 days ago</td>
+          <td style="text-align: right;">
+            <button class="btn-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </td>
+        </tr>
+        <!-- Duplicate rows to show scrolling -->
+        <tr>
+          <td>
+            <div class="cell-primary">
+              <img src="https://i.pravatar.cc/150?u=5" alt="Avatar" class="avatar">
+              Candice Wu
+            </div>
+          </td>
+          <td>Backend Developer</td>
+          <td><span class="status-badge status-active">Active</span></td>
+          <td>1 hr ago</td>
+          <td style="text-align: right;">
+            <button class="btn-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

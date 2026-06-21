@@ -1,0 +1,157 @@
+<!-- Card: Service / Offer
+     UX-UI System — 4_LIBRARY/components/cards/card-service.html
+     Usage: Copy this block into any page's service/feature section
+     Pairs with: b2b-light.css or b2b-dark.css palettes
+-->
+
+<!-- LIGHT THEME VERSION -->
+<style>
+  .service-card {
+    background: var(--color-bg-base, #FFFFFF);
+    border: 1px solid var(--color-border, #E2E8F0);
+    border-radius: var(--radius-xl, 1.25rem);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-accent-dim, rgba(29,78,216,0.04)), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -6px rgb(0 0 0 / 0.1);
+  }
+  .service-card:hover::before { opacity: 1; }
+
+  /* Icon badge */
+  .service-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md, 0.75rem);
+    background: var(--color-accent-light, #EFF6FF);
+    border: 1px solid #BFDBFE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent, #1D4ED8);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Optional: badge (e.g. "Most Popular", "New") */
+  .service-card__badge {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    background: var(--color-accent, #1D4ED8);
+    color: #FFFFFF;
+  }
+
+  .service-card__title {
+    font-family: var(--font-heading, 'Inter', sans-serif);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--color-text-primary, #04091A);
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-card__desc {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--color-text-body, #64748B);
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-card__features {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .service-card__features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-body, #64748B);
+  }
+  .service-card__features li::before {
+    content: '✓';
+    color: var(--color-success, #10B981);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .service-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-accent, #1D4ED8);
+    text-decoration: none;
+    transition: gap 0.2s;
+    position: relative;
+    z-index: 1;
+  }
+  .service-card__link:hover { gap: 0.625rem; }
+</style>
+
+<!--
+  === USAGE ===
+  Replace [Service Name], [Description], and feature bullets.
+  Copy icon SVG from Lucide (lucide.dev) or heroicons.
+  Optional: add data-animate="fade-up" for scroll reveal.
+-->
+
+<article class="service-card" data-animate="fade-up">
+  <!-- Optional badge: -->
+  <!-- <span class="service-card__badge">Popular</span> -->
+
+  <div class="service-card__icon" aria-hidden="true">
+    <!-- Replace with relevant icon (22x22) -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+
+  <h3 class="service-card__title">[Service Name]</h3>
+
+  <p class="service-card__desc">
+    [1–2 sentence description of the service — focus on benefit, not feature]
+  </p>
+
+  <ul class="service-card__features" aria-label="What's included">
+    <li>[Key deliverable 1]</li>
+    <li>[Key deliverable 2]</li>
+    <li>[Key deliverable 3]</li>
+  </ul>
+
+  <a href="#contact" class="service-card__link">
+    Learn more
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</article>

@@ -1,0 +1,47 @@
+# Palette: B2B Light
+# Profile: Professional B2B SaaS / Agency — white canvas, blue trust
+
+:root {
+  /* Backgrounds */
+  --color-bg-base:      #FFFFFF;
+  --color-bg-surface:   #F8FAFC;
+  --color-bg-elevated:  #F1F5F9;
+  --color-bg-inverted:  #04091A;
+
+  /* Text */
+  --color-text-primary: #04091A;
+  --color-text-body:    #64748B;
+  --color-text-muted:   #94A3B8;
+  --color-text-inverse: #FFFFFF;
+
+  /* Accent */
+  --color-accent-primary: #1D4ED8;
+  --color-accent-hover:   #2563EB;
+  --color-accent-light:   #EFF6FF;
+  --color-accent-border:  #BFDBFE;
+
+  /* Secondary accents */
+  --color-accent-indigo:  #6366F1;
+  --color-accent-amber:   #F59E0B;
+  --color-accent-green:   #10B981;
+
+  /* Borders */
+  --color-border:         #E2E8F0;
+  --color-border-subtle:  #F1F5F9;
+
+  /* Semantic */
+  --color-success:  #10B981;
+  --color-warning:  #F59E0B;
+  --color-error:    #EF4444;
+  --color-info:     #3B82F6;
+}
+
+/*
+Usage:
+  Background pages:   var(--color-bg-base)
+  Card backgrounds:   var(--color-bg-surface)
+  Primary button:     bg var(--color-bg-inverted), hover var(--color-accent-primary)
+  Links:              var(--color-accent-primary)
+  Body text:          var(--color-text-body)
+  Headings:           var(--color-text-primary)
+*/

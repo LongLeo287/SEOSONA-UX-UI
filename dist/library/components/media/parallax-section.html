@@ -1,0 +1,90 @@
+<!-- Parallax Scrolling Section
+     UX-UI System — 4_LIBRARY/components/media/parallax-section.html
+-->
+
+<style>
+  /* Wrapper needed to allow scrolling in demo */
+  .demo-page {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    height: 300vh; /* Make page tall to test scrolling */
+  }
+  
+  .content-section {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: var(--color-bg-base, #FFFFFF);
+  }
+
+  /* 
+   * CSS-only Parallax 
+   * Uses background-attachment: fixed.
+   * Note: This effect is sometimes disabled on mobile browsers for performance.
+   */
+  .parallax-section {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* The magic */
+    background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /* Overlay to make text readable */
+  .parallax-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 9, 26, 0.6);
+  }
+
+  .parallax-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #FFFFFF;
+    max-width: 800px;
+    padding: 0 2rem;
+  }
+
+  .parallax-title {
+    font-family: var(--font-heading, 'Poppins', sans-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .parallax-desc {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-weight: 400;
+    opacity: 0.9;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+</style>
+
+<div class="demo-page">
+  <div class="content-section">
+    <h2>Scroll down to see the parallax effect</h2>
+    <p>This uses pure CSS <code>background-attachment: fixed</code> for a simple, performant parallax effect.</p>
+  </div>
+
+  <section class="parallax-section">
+    <div class="parallax-overlay"></div>
+    <div class="parallax-content">
+      <h2 class="parallax-title">Explore the Unknown</h2>
+      <p class="parallax-desc">Creating digital experiences that push the boundaries of what is possible on the web.</p>
+    </div>
+  </section>
+
+  <div class="content-section">
+    <h2>Keep Scrolling</h2>
+    <p>Notice how the background image stays fixed relative to the viewport while the content scrolls over it.</p>
+  </div>
+</div>
