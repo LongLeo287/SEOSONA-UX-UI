@@ -1,0 +1,205 @@
+<!-- Progress Bars & Loaders
+     UX-UI System — 4_LIBRARY/components/feedback/progress-bars.html
+-->
+
+<style>
+  .demo-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  h3 { color: var(--color-text-primary, #04091A); margin-bottom: 1rem; font-family: var(--font-heading, 'Poppins', sans-serif); }
+
+  /* 
+   * 1. Linear Progress Bar 
+   */
+  .progress-wrapper {
+    width: 100%;
+  }
+  .progress-label-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #04091A);
+  }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: var(--color-bg-surface, #F8FAFC);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--color-accent, #1D4ED8);
+    border-radius: 999px;
+    transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  /* Animated Stripes Variant */
+  .progress-fill.striped {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255,255,255,0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255,255,255,0.15) 50%,
+      rgba(255,255,255,0.15) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 1rem 1rem;
+    animation: stripes 1s linear infinite;
+  }
+  
+  @keyframes stripes {
+    from { background-position: 1rem 0; }
+    to { background-position: 0 0; }
+  }
+
+
+  /* 
+   * 2. Indeterminate Loader (Line) 
+   */
+  .loader-line {
+    width: 100%;
+    height: 4px;
+    background: var(--color-bg-surface, #F8FAFC);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .loader-line::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: var(--color-accent, #1D4ED8);
+    animation: indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  }
+  
+  @keyframes indeterminate {
+    0% { left: -35%; right: 100%; }
+    60% { left: 100%; right: -90%; }
+    100% { left: 100%; right: -90%; }
+  }
+
+
+  /* 
+   * 3. Circular Spinner 
+   */
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-bg-surface, #F8FAFC);
+    border-top-color: var(--color-accent, #1D4ED8);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Ghost/Button variant */
+  .spinner-sm {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* 
+   * 4. Skeleton Loader (Content Placeholder) 
+   */
+  .skeleton {
+    background: #E2E8F0;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.4),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+  
+  .skeleton-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border, #E2E8F0);
+    border-radius: var(--radius-md, 0.5rem);
+  }
+  .skeleton-avatar { width: 48px; height: 48px; border-radius: 50%; }
+  .skeleton-lines { flex-grow: 1; display: flex; flex-direction: column; gap: 0.5rem; justify-content: center; }
+  .skeleton-line { height: 12px; width: 100%; }
+  .skeleton-line.short { width: 60%; }
+
+</style>
+
+<div class="demo-container">
+
+  <!-- Determinate Progress -->
+  <div>
+    <h3>Determinate Progress</h3>
+    <div class="progress-wrapper">
+      <div class="progress-label-wrap">
+        <span>Uploading files...</span>
+        <span>65%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill striped" style="width: 65%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Indeterminate Line -->
+  <div>
+    <h3>Indeterminate Line (Background Task)</h3>
+    <div class="loader-line"></div>
+  </div>
+
+  <!-- Spinners -->
+  <div>
+    <h3>Circular Spinners</h3>
+    <div style="display: flex; gap: 2rem; align-items: center;">
+      <div class="spinner"></div>
+      
+      <!-- Inside a button -->
+      <button style="padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem; background: #1D4ED8; color: #fff; border: none; border-radius: 0.5rem; font-weight: 600;">
+        <div class="spinner spinner-sm" style="border-top-color: #fff; border-right-color: #fff; border-bottom-color: rgba(255,255,255,0.3); border-left-color: rgba(255,255,255,0.3);"></div>
+        Processing
+      </button>
+    </div>
+  </div>
+
+  <!-- Skeletons -->
+  <div>
+    <h3>Skeleton Loaders (Content)</h3>
+    <div class="skeleton-card">
+      <div class="skeleton skeleton-avatar"></div>
+      <div class="skeleton-lines">
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line short"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

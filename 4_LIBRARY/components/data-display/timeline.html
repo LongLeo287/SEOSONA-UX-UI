@@ -1,0 +1,241 @@
+<!-- Vertical Timeline
+     UX-UI System — 4_LIBRARY/components/data-display/timeline.html
+-->
+
+<style>
+  .timeline-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    padding: 0 1rem;
+  }
+  
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  
+  /* The central line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 7px; /* center of the 16px dot */
+    width: 2px;
+    background: var(--color-border, #E2E8F0);
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+  
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* The dot */
+  .timeline-dot {
+    position: absolute;
+    top: 4px;
+    left: -2rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-bg-base, #FFFFFF);
+    border: 3px solid var(--color-border, #94A3B8);
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-item.active .timeline-dot {
+    border-color: var(--color-accent, #1D4ED8);
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.15);
+  }
+  
+  .timeline-item.completed .timeline-dot {
+    background: var(--color-accent, #1D4ED8);
+    border-color: var(--color-accent, #1D4ED8);
+  }
+  
+  /* The content */
+  .timeline-content {
+    background: var(--color-bg-base, #FFFFFF);
+    border: 1px solid var(--color-border, #E2E8F0);
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .timeline-item:hover .timeline-content {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  }
+  
+  /* Optional: Arrow pointing to the dot */
+  .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -6px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-bg-base, #FFFFFF);
+    border-left: 1px solid var(--color-border, #E2E8F0);
+    border-bottom: 1px solid var(--color-border, #E2E8F0);
+    transform: rotate(45deg);
+  }
+  
+  .timeline-date {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent, #1D4ED8);
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-title {
+    font-family: var(--font-heading, 'Poppins', sans-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #04091A);
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-body, #64748B);
+    line-height: 1.6;
+  }
+
+  /* Right-aligned variant for larger screens (Alternating timeline) */
+  @media (min-width: 768px) {
+    .timeline-alternating {
+      padding-left: 0;
+    }
+    .timeline-alternating::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .timeline-alternating .timeline-item {
+      width: 50%;
+      padding-right: 2.5rem;
+      margin-bottom: 0;
+    }
+    .timeline-alternating .timeline-item:nth-child(even) {
+      margin-left: auto;
+      padding-right: 0;
+      padding-left: 2.5rem;
+    }
+    /* Dots for alternating */
+    .timeline-alternating .timeline-dot {
+      left: auto;
+      right: -8px; /* half of 16px */
+    }
+    .timeline-alternating .timeline-item:nth-child(even) .timeline-dot {
+      right: auto;
+      left: -8px;
+    }
+    /* Arrows for alternating */
+    .timeline-alternating .timeline-content::before {
+      left: auto;
+      right: -6px;
+      border-left: none;
+      border-bottom: none;
+      border-right: 1px solid var(--color-border, #E2E8F0);
+      border-top: 1px solid var(--color-border, #E2E8F0);
+    }
+    .timeline-alternating .timeline-item:nth-child(even) .timeline-content::before {
+      right: auto;
+      left: -6px;
+      border-right: none;
+      border-top: none;
+      border-left: 1px solid var(--color-border, #E2E8F0);
+      border-bottom: 1px solid var(--color-border, #E2E8F0);
+    }
+  }
+</style>
+
+<div class="timeline-container">
+  
+  <h3>Standard Timeline (Left Aligned)</h3>
+  <br>
+  <div class="timeline">
+    
+    <div class="timeline-item completed">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Jan 2026</span>
+        <h4 class="timeline-title">Project Kickoff</h4>
+        <p class="timeline-desc">Initial meeting with stakeholders to define the project scope, requirements, and key deliverables for Q1.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item active">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Feb 2026</span>
+        <h4 class="timeline-title">Design Phase</h4>
+        <p class="timeline-desc">UX/UI team creates wireframes, high-fidelity mockups, and interactive prototypes for the new platform.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Mar 2026</span>
+        <h4 class="timeline-title">Development</h4>
+        <p class="timeline-desc">Engineering team begins building the frontend components and backend APIs based on the approved designs.</p>
+      </div>
+    </div>
+    
+  </div>
+
+  <br><br><br>
+  <h3>Alternating Timeline (Center Aligned on Desktop)</h3>
+  <br>
+  <div class="timeline timeline-alternating">
+    
+    <div class="timeline-item completed">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Step 1</span>
+        <h4 class="timeline-title">Register Account</h4>
+        <p class="timeline-desc">Sign up using your email or Google account to get access to the dashboard.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item completed">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Step 2</span>
+        <h4 class="timeline-title">Connect Integration</h4>
+        <p class="timeline-desc">Link your existing CRM or marketing tools via our seamless OAuth process.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item active">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Step 3</span>
+        <h4 class="timeline-title">Sync Data</h4>
+        <p class="timeline-desc">Our system will automatically pull in your historical data and organize it.</p>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Step 4</span>
+        <h4 class="timeline-title">Generate Reports</h4>
+        <p class="timeline-desc">Create custom reports and share them with your team automatically.</p>
+      </div>
+    </div>
+    
+  </div>
+</div>
