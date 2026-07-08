@@ -13,5 +13,7 @@ Thumbs.db
 # Build artifacts
 *.tsbuildinfo
 node_modules/
+dist/library/
 .env
 .env.local
+dist/
