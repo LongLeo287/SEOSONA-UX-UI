@@ -98,11 +98,11 @@ function groupByCategory(items) {
 
 fs.writeFileSync(path.join(outputDir, 'index.html'), htmlContent);
 
-// Copy library files to dist/library so relative links work
-const ncp = require('child_process').execSync;
+// Copy library files to dist/library so relative links work (cross-platform — the previous
+// `powershell Copy-Item` shell-out silently failed on the Linux CI runner, breaking the
+// deployed showcase's relative links).
 try {
-  // Use powershell Copy-Item for cross-compatibility in this specific environment
-  ncp('powershell -Command "Copy-Item -Path \'4_LIBRARY\' -Destination \'dist/library\' -Recurse -Force"', { cwd: rootDir });
+  fs.cpSync(path.join(rootDir, '4_LIBRARY'), path.join(rootDir, 'dist', 'library'), { recursive: true });
   console.log('✅ Library files copied to dist/library');
 } catch (e) {
   console.error('Failed to copy library files:', e.message);
