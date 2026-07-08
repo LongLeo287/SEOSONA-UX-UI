@@ -58,12 +58,22 @@ Every deliverable from this system must meet:
 - No build tools required for Library components
 - Dynamic templates may use CDN-loaded libraries only (no npm required)
 
-### Approved Libraries (CDN only)
+### Approved Libraries
+
+Two complementary **motion stores** — different engines, different strengths; pick per use and
+wire both in (via CDN, or the `gsap` npm dep for GSAP builds):
+
 | Library | Version | Purpose |
 |---|---|---|
-| Anime.js | 4.x | Animations & micro-interactions |
+| Anime.js | 4.x | Lightweight animations & micro-interactions (default) |
+| GSAP | 3.x | Timeline-heavy, scroll-driven, complex sequenced motion |
 | Intersection Observer API | Native | Scroll-triggered animations |
 | Google Fonts | Latest | Typography |
+
+> `4_LIBRARY/motion/` is split along these two stores — GSAP: `entrance-animations.js`; Anime.js
+> 4.x: `counter-animations.js` / `page-transitions.js` / `scroll-triggers.js`. The standalone
+> `templates/dynamic/saas-motion-homepage` example pins Anime.js 3.2.2 (v3 API — `anime()`,
+> `anime.timeline`, `anime.stagger`) and is kept as-is so it keeps working; **new work uses 4.x**.
 
 ### Prohibited
 - Inline styles (except for CSS custom property overrides)
