@@ -23,11 +23,10 @@ The project strictly follows the SEOSONA 7-Tier directory architecture:
 
 - `0_BRAIN/` - System rules, architectural guidelines, and AI logic constraints.
 - `1_AGENTS/` - Agent execution logs and memory context.
-- `2_SKILLS/` - Custom skills and capabilities.
+- `2_KNOWLEDGE/` - Skills (`skills/`), SOPs and UX patterns.
 - `3_KNOWLEDGE/` - Centralized knowledge base (Master Index, SEO concepts).
 - `4_LIBRARY/` - **The Core UI Library** (Components, Templates, Tokens, Motion).
-- `5_WORKFLOWS/` - Automated operational pipelines.
-- `6_WORKSPACE/` - Scratchpads and active development zones.
+- `3_WORKFLOWS/` - Automated operational pipelines.
 
 ---
 

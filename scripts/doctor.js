@@ -6,14 +6,19 @@ const path = require('path');
 
 console.log('🩺 Running SEOSONA UX-UI System Doctor...\n');
 
+// Cây thật của repo từ 20/06/2026 (commit 7cd5de2): skills nằm trong
+// 2_KNOWLEDGE/skills, workflows ở 3_WORKFLOWS. Danh sách cũ (2_SKILLS,
+// 5_WORKFLOWS, 6_WORKSPACE) mô tả một sơ đồ chưa bao giờ được tạo, nên
+// "Build and Deploy Showcase" đỏ ở bước Doctor suốt từ đó — CI báo lỗi cho
+// thứ không phải lỗi thì người ta tắt CI đi, và thế còn tệ hơn không có.
 const requiredDirs = [
   '0_BRAIN',
   '1_AGENTS',
-  '2_SKILLS',
+  '2_KNOWLEDGE',
+  '2_KNOWLEDGE/skills',
   '3_KNOWLEDGE',
-  '4_LIBRARY',
-  '5_WORKFLOWS',
-  '6_WORKSPACE'
+  '3_WORKFLOWS',
+  '4_LIBRARY'
 ];
 
 let allPassed = true;
